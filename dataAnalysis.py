@@ -29,8 +29,8 @@ print('Customers who have phone service: {}%', 100*len(df[df['PhoneService'] != 
 #Classification Problem
 print(df.Churn.unique())
 
-# sn.countplot(x=df.Churn);
-# plt.show();
+sn.countplot(x=df.Churn)
+plt.show()
 counts = df.Churn.value_counts()
 print(counts)
 #Yes only counts for 26.53% of the total samples ==> Data Imbalance
@@ -64,28 +64,28 @@ print(df.info())
 print(df.MultipleLines.unique())
 #Comparing Customers who left and those who didn't in regards to (charges, tenure, internet service, phone service, contract, multiple lines)
 #MonthlyCharges distribution isn't normal
-# df['MonthlyCharges'].hist()
-# plt.title('MonthlyCharges')
-# plt.show()
+df['MonthlyCharges'].hist()
+plt.title('MonthlyCharges')
+plt.show()
 
 print(df.pivot_table(index='Churn', values='MonthlyCharges', aggfunc='median'))
 
 #High prices might be the reason why some customers are leaving
-# sn.histplot(df, x="MonthlyCharges", hue="Churn", element="step")
-# plt.show()
-# sn.boxplot(x='Churn', y='MonthlyCharges', data=df)
-# plt.show()
+sn.histplot(df, x="MonthlyCharges", hue="Churn", element="step")
+plt.show()
+sn.boxplot(x='Churn', y='MonthlyCharges', data=df)
+plt.show()
 
-# sn.boxplot(x='Churn', y='TotalCharges', data=df)
-# plt.show()
+sn.boxplot(x='Churn', y='TotalCharges', data=df)
+plt.show()
 
 #Those who churned have got higher total charges
-# sn.lineplot(x='tenure', y='TotalCharges',hue ='Churn',  data=df)
-# plt.show()
+sn.lineplot(x='tenure', y='TotalCharges',hue ='Churn',  data=df)
+plt.show()
 
 #Those who churned have mostly subscribed to fiber, or DSL
 sn.histplot(x=df.InternetService, hue=df.Churn)
-# plt.show()
+plt.show()
 
 churned = df[df['Churn'] == 'Yes']
 not_churned = df[df['Churn'] == 'No']
@@ -96,19 +96,19 @@ not_churned_plotted = pd.Series(not_churned['InternetService'].value_counts())[:
 # 69% used fiber optic
 #25% of them had DSL
 #Only 6% of them did not have internet services.
-# plt.pie(labels = plotted[:]/plotted.sum(), x=plotted[:])
-# plt.show()
+plt.pie(labels = plotted[:]/plotted.sum(), x=plotted[:])
+plt.show()
 
 #Those who stayed:
 #35% had fiber optic, and 38% had DSL
 plt.pie(labels = (not_churned_plotted[:]/not_churned_plotted.sum()).round(2), x=plotted)
-# plt.show()
+plt.show()
 
 #Seeing as the monthly charges of those who churned was higher than those who stayed,
 # most churners having a fiber service, maybe the cost of fiber was cause for churning
 
-# sn.histplot(x=df.MultipleLines, hue=df.Churn)
-# plt.show()
+sn.histplot(x=df.MultipleLines, hue=df.Churn)
+plt.show()
 
 # print('churned.MultipleLines: \n', churned.MultipleLines.value_counts()*100/len(churned))
 # print('not_churned.MultipleLines: \n',not_churned.MultipleLines.value_counts()*100/len(not_churned))
@@ -116,12 +116,11 @@ plt.pie(labels = (not_churned_plotted[:]/not_churned_plotted.sum()).round(2), x=
 sn.histplot(x=df.Contract, hue=df.Churn)
 plt.show()
 print((churned.Contract.value_counts()*100/len(churned)).round(2))
-
 print((not_churned.Contract.value_counts()*100/len(not_churned)).round(2))
 
 #Those with less tenure are more likely to churn
 sn.boxplot(x='Churn', y='tenure', data=df)
-# plt.show()
+plt.show()
 
 #Preprocessing
 #dropping ID column
@@ -132,8 +131,8 @@ target = df['Churn']
 print((target.value_counts(normalize=True)*100).round(3))
 
 #One Hot Encoding 
-# df.hist()
-# plt.show()
+df.hist()
+plt.show()
 # OHE on the categorical columns
 ohe_cols = ['InternetService','gender','PaymentMethod', 'MultipleLines', 'Contract']
 def OHE_encoding():
@@ -155,7 +154,7 @@ ax = plt.axes()
 plt.gcf().set_size_inches(3,10)
 sn.heatmap(new_df.corr()[['Churn']].sort_values('Churn', ascending=False), cmap='Blues', annot=True)
 ax.set_title('Features Correlations')
-# plt.show();
+plt.show();
 # ==>The features that have some correlation to the target are fiber optic(expensive product).
 # And payment method of electronic check(complicated paying method?).
 #tenure(neg, the less, the more likely to churn), two-year-contract (if yes, then the less likely to churn) .
@@ -174,7 +173,6 @@ SMOTE_features, SMOTE_target = smote(X_train, y_train)
 # downsampled_features.to_pickle('downsampled_features.pkl')
 # upsampled_features.to_pickle('upsampled_features.pkl')
 # SMOTE_features.to_pickle('SMOTE_features.pkl')
-
 # downsampled_target.to_pickle()
 # upsampled_target.to_pickle()
 # SMOTE_target.to_pickle()

@@ -1,11 +1,16 @@
-#PROBLEM FORMULATION#
+# Customer Churn Prediction
+
+*Download data from this link: https://www.kaggle.com/blastchar/telco-customer-churn
+You can place it in the same folder as the current files.*
+
+***PROBLEM FORMULATION***
 
 1/ Why are the customers churning?
 
 2/Can we determine which customers will leave so that we have 
 an intensive Marketing campaign to prevent the churn?
 
-#STEPS INVOLVED#
+***STEPS INVOLVED***
 
 1/Data cleaning, EDA (Matplotlib, Seaborn)
 
@@ -13,7 +18,7 @@ an intensive Marketing campaign to prevent the churn?
 
 3/Running different ML algorithms with different hyperparameters using MLflow
 
-#ORDER OF EXECUTION OF FILES
+***ORDER OF EXECUTION OF FILES***
 
 First run dataAnalysis.py to have some insights about your data.
 Second run whichever file prefixed by 'train_' you'd like.
